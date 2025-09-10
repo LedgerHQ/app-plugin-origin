@@ -6,8 +6,8 @@ contract_ousd_flipper = load_contract(
     "flipper"
 )
 
-def test_ousd_flipper_flip_with_usdc(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_ousd_flipper.encodeABI("buyOusdWithUsdc", [
+def test_ousd_flipper_flip_with_usdc(backend, navigator, test_name, wallet_addr):
+    data = contract_ousd_flipper.encode_abi("buyOusdWithUsdc", [
         Web3.to_wei(10000, "ether")
     ])
 
@@ -15,14 +15,13 @@ def test_ousd_flipper_flip_with_usdc(backend, firmware, navigator, test_name, wa
         contract_ousd_flipper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name, 
         wallet_addr
     )
 
-def test_ousd_flipper_flip_to_usdc(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_ousd_flipper.encodeABI("sellOusdForUsdc", [
+def test_ousd_flipper_flip_to_usdc(backend, navigator, test_name, wallet_addr):
+    data = contract_ousd_flipper.encode_abi("sellOusdForUsdc", [
         Web3.to_wei(10000, "ether")
     ])
 
@@ -30,14 +29,13 @@ def test_ousd_flipper_flip_to_usdc(backend, firmware, navigator, test_name, wall
         contract_ousd_flipper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name, 
         wallet_addr
     )
 
-def test_ousd_flipper_flip_with_usdt(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_ousd_flipper.encodeABI("buyOusdWithUsdt", [
+def test_ousd_flipper_flip_with_usdt(backend, navigator, test_name, wallet_addr):
+    data = contract_ousd_flipper.encode_abi("buyOusdWithUsdt", [
         Web3.to_wei(10000, "ether"),
     ])
 
@@ -45,14 +43,13 @@ def test_ousd_flipper_flip_with_usdt(backend, firmware, navigator, test_name, wa
         contract_ousd_flipper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name, 
         wallet_addr
     )
 
-def test_ousd_flipper_flip_to_usdt(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_ousd_flipper.encodeABI("sellOusdForUsdt", [
+def test_ousd_flipper_flip_to_usdt(backend, navigator, test_name, wallet_addr):
+    data = contract_ousd_flipper.encode_abi("sellOusdForUsdt", [
         Web3.to_wei(10000, "ether")
     ])
 
@@ -60,14 +57,13 @@ def test_ousd_flipper_flip_to_usdt(backend, firmware, navigator, test_name, wall
         contract_ousd_flipper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name, 
         wallet_addr
     )
 
-def test_ousd_flipper_flip_with_dai(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_ousd_flipper.encodeABI("buyOusdWithDai", [
+def test_ousd_flipper_flip_with_dai(backend, navigator, test_name, wallet_addr):
+    data = contract_ousd_flipper.encode_abi("buyOusdWithDai", [
         Web3.to_wei(10000, "ether")
     ])
 
@@ -75,14 +71,13 @@ def test_ousd_flipper_flip_with_dai(backend, firmware, navigator, test_name, wal
         contract_ousd_flipper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name, 
         wallet_addr
     )
 
-def test_ousd_flipper_flip_to_dai(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_ousd_flipper.encodeABI("sellOusdForDai", [
+def test_ousd_flipper_flip_to_dai(backend, navigator, test_name, wallet_addr):
+    data = contract_ousd_flipper.encode_abi("sellOusdForDai", [
         Web3.to_wei(10000, "ether")
     ])
 
@@ -90,7 +85,6 @@ def test_ousd_flipper_flip_to_dai(backend, firmware, navigator, test_name, walle
         contract_ousd_flipper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name, 
         wallet_addr

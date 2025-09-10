@@ -128,6 +128,10 @@ typedef struct context_s {
     selector_t selectorIndex;
 } context_t;
 
+// Check that the plugin context structure will fit in the ethereum allocated memory.
+// for us Do not remove!
+ASSERT_SIZEOF_PLUGIN_CONTEXT(context_t);
+
 typedef enum {
     SEND_SCREEN,
     RECEIVE_SCREEN,
@@ -210,10 +214,6 @@ extern const uint8_t WOETH_ADDRESS[ADDRESS_LENGTH];
 #define ADDRESS_IS_DAI(_addr)    (!memcmp(_addr, DAI_ADDRESS, ADDRESS_LENGTH))
 #define ADDRESS_IS_USDC(_addr)   (!memcmp(_addr, USDC_ADDRESS, ADDRESS_LENGTH))
 #define ADDRESS_IS_USDT(_addr)   (!memcmp(_addr, USDT_ADDRESS, ADDRESS_LENGTH))
-
-// Check if the context structure will fit in the RAM section ETH will prepare
-// for us Do not remove!
-ASSERT_SIZEOF_PLUGIN_CONTEXT(context_t);
 
 void handle_provide_parameter(ethPluginProvideParameter_t *msg);
 void handle_query_contract_ui(ethQueryContractUI_t *msg);

@@ -27,9 +27,8 @@ static void handle_token_sent(ethPluginProvideParameter_t *msg, context_t *conte
 static bool handle_token_sent_curve_pool(ethPluginProvideParameter_t *msg, context_t *context) {
     memset(context->contract_address_sent, 0, sizeof(context->contract_address_sent));
 
-    bool is_oeth = memcmp(CURVE_OETH_POOL_ADDRESS,
-                          msg->pluginSharedRO->txContent->destination,
-                          ADDRESS_LENGTH) == 0;
+    bool is_oeth =
+        memcmp(CURVE_OETH_POOL_ADDRESS, msg->txContent->destination, ADDRESS_LENGTH) == 0;
 
     // Ensure that everything but the last 2 bytes are zero
     for (uint32_t i = 2; i <= INT128_LENGTH / 2; i++) {
@@ -88,9 +87,8 @@ static void handle_token_received(ethPluginProvideParameter_t *msg, context_t *c
 static bool handle_token_received_curve_pool(ethPluginProvideParameter_t *msg, context_t *context) {
     memset(context->contract_address_received, 0, sizeof(context->contract_address_received));
 
-    bool is_oeth = memcmp(CURVE_OETH_POOL_ADDRESS,
-                          msg->pluginSharedRO->txContent->destination,
-                          ADDRESS_LENGTH) == 0;
+    bool is_oeth =
+        memcmp(CURVE_OETH_POOL_ADDRESS, msg->txContent->destination, ADDRESS_LENGTH) == 0;
 
     // Ensure that everything but the last 2 bytes are zero
     for (uint32_t i = 2; i <= INT128_LENGTH / 2; i++) {
