@@ -20,15 +20,6 @@ int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     ethQueryContractUI_t query_ui = {0};
     txContent_t content = {0};
 
-    // Fake sha3 context
-    cx_sha3_t sha3;
-
-    ethPluginSharedRO_t shared_ro;
-    shared_ro.txContent = &content;
-
-    ethPluginSharedRW_t shared_rw;
-    shared_rw.sha3 = &sha3;
-
     context_t context;
     const uint8_t address[ADDRESS_LENGTH] = {0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee,
                                              0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee,
@@ -56,7 +47,7 @@ int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     init_contract.selector = data;
     init_contract.pluginContext = (uint8_t *) &context;
     init_contract.pluginContextLength = sizeof(context);
-    init_contract.pluginSharedRO = &shared_ro;
+    init_contract.txContent = &content;
 
     handle_init_contract(&init_contract);
     if (init_contract.result != ETH_PLUGIN_RESULT_OK) {
@@ -129,8 +120,7 @@ int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         query_ui.msg = msg;
         query_ui.msgLength = sizeof(msg);
         query_ui.pluginContext = (uint8_t *) &context;
-        query_ui.pluginSharedRO = &shared_ro;
-        query_ui.pluginSharedRW = &shared_rw;
+        query_ui.txContent = &content;
 
         query_ui.screenIndex = i;
         handle_query_contract_ui(&query_ui);

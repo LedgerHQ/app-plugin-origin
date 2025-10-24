@@ -6,24 +6,23 @@ contract_oeth_zapper = load_contract(
     "zapper"
 )
 
-def test_oeth_zapper_deposit_eth(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_oeth_zapper.encodeABI("deposit", [])
+def test_oeth_zapper_deposit_eth(backend, navigator, test_name, wallet_addr):
+    data = contract_oeth_zapper.encode_abi("deposit", [])
 
     run_test(
         contract_oeth_zapper, 
         data, 
         backend, 
-        firmware, 
         navigator, 
         test_name,
         wallet_addr,
         value=Web3.to_wei(1, "ether")
     )
 
-def test_oeth_zapper_deposit_sfrxeth(backend, firmware, navigator, test_name, wallet_addr):
-    data = contract_oeth_zapper.encodeABI("depositSFRXETH", [
+def test_oeth_zapper_deposit_sfrxeth(backend, navigator, test_name, wallet_addr):
+    data = contract_oeth_zapper.encode_abi("depositSFRXETH", [
         Web3.to_wei(1, "ether"),
         Web3.to_wei(0.991, "ether")
     ])
 
-    run_test(contract_oeth_zapper, data, backend, firmware, navigator, test_name, wallet_addr)
+    run_test(contract_oeth_zapper, data, backend, navigator, test_name, wallet_addr)

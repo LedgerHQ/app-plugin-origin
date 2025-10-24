@@ -8,8 +8,7 @@ static bool set_send_ui(ethQueryContractUI_t *msg, context_t *context) {
 
     context->amount_length = INT256_LENGTH;
 
-    bool is_woeth =
-        memcmp(WOETH_ADDRESS, msg->pluginSharedRO->txContent->destination, ADDRESS_LENGTH) == 0;
+    bool is_woeth = memcmp(WOETH_ADDRESS, msg->txContent->destination, ADDRESS_LENGTH) == 0;
 
     strlcpy(msg->title, "Send", msg->titleLength);
 
@@ -17,9 +16,9 @@ static bool set_send_ui(ethQueryContractUI_t *msg, context_t *context) {
         case ZAPPER_DEPOSIT_ETH:
             strlcpy(msg->title, "Deposit", msg->titleLength);
             memcpy(context->amount_sent,
-                   &msg->pluginSharedRO->txContent->value.value,
-                   msg->pluginSharedRO->txContent->value.length);
-            context->amount_length = msg->pluginSharedRO->txContent->value.length;
+                   &msg->txContent->value.value,
+                   msg->txContent->value.length);
+            context->amount_length = msg->txContent->value.length;
             break;
         case ZAPPER_DEPOSIT_SFRXETH:
             strlcpy(msg->title, "Deposit", msg->titleLength);
@@ -34,9 +33,7 @@ static bool set_send_ui(ethQueryContractUI_t *msg, context_t *context) {
             break;
         case VAULT_REDEEM:
             strlcpy(msg->title, "Redeem", msg->titleLength);
-            if (memcmp(OETH_VAULT_ADDRESS,
-                       msg->pluginSharedRO->txContent->destination,
-                       ADDRESS_LENGTH) == 0) {
+            if (memcmp(OETH_VAULT_ADDRESS, msg->txContent->destination, ADDRESS_LENGTH) == 0) {
                 strlcpy(context->ticker_sent, OETH_TICKER, sizeof(context->ticker_sent));
             } else {
                 strlcpy(context->ticker_sent, OUSD_TICKER, sizeof(context->ticker_sent));
@@ -110,16 +107,14 @@ static bool set_receive_ui(ethQueryContractUI_t *msg, context_t *context) {
 
     strlcpy(msg->title, "Receive Min", msg->titleLength);
 
-    bool is_oeth =
-        memcmp(OETH_VAULT_ADDRESS, msg->pluginSharedRO->txContent->destination, ADDRESS_LENGTH) ==
-        0;
+    bool is_oeth = memcmp(OETH_VAULT_ADDRESS, msg->txContent->destination, ADDRESS_LENGTH) == 0;
 
     switch (context->selectorIndex) {
         case ZAPPER_DEPOSIT_ETH:
             memcpy(context->min_amount_received,
-                   &msg->pluginSharedRO->txContent->value.value,
-                   msg->pluginSharedRO->txContent->value.length);
-            context->amount_length = msg->pluginSharedRO->txContent->value.length;
+                   &msg->txContent->value.value,
+                   msg->txContent->value.length);
+            context->amount_length = msg->txContent->value.length;
             strlcpy(context->ticker_received, OETH_TICKER, sizeof(context->ticker_received));
             break;
         case ZAPPER_DEPOSIT_SFRXETH:
